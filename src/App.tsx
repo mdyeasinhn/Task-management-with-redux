@@ -10,14 +10,14 @@ function App() {
 
   return (
     <>
-    
-    <div className='flex'>
-    <Navbar />
+
+      <div className='flex'>
+        <Navbar />
         <Outlet />
-      <div className='ml-auto'>
-        <ModeToggle/>
+        <div className='ml-auto'>
+          <ModeToggle />
+        </div>
       </div>
-    </div>
 
     </>
   )
