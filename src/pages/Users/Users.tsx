@@ -1,11 +1,9 @@
 
 
-const User = () => {
-    return (
-        <div>
-            i am user
-        </div>
-    );
-};
-
-export default User;
+export default function Users() {
+  return (
+    <div>
+      i am user
+    </div>
+  )
+}
