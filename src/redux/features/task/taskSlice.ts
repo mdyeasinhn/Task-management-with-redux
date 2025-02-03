@@ -39,19 +39,38 @@ const taskSlice = createSlice({
             state.tasks.forEach((task) => task.id === action.payload ? task.isCompleted = !task.isCompleted : task)
         },
         deleteTask: (state, action: PayloadAction<string>) => {
-         state.tasks =  state.tasks.filter(task => task.id !== action.payload)
-        }
+            state.tasks = state.tasks.filter(task => task.id !== action.payload)
+        },
+        updateFilter: (state, action: PayloadAction<"all" | "low" | "medium" | "high">) => {
+            state.filter = action.payload
+        },
+        updateTask: (state, action: PayloadAction<{ id: string; updatedTask: DraftTask }>) => {
+            const { id, updatedTask } = action.payload;
+            state.tasks = state.tasks.map(task =>
+                task.id === id ? { ...task, ...updatedTask } : task
+            );
+        },
     },
 
 });
 
 export const selectTasks = (state: RootState) => {
+    const filter = state.todo.filter;
 
-    return state.todo.tasks
+    if (filter === 'low') {
+        return state.todo.tasks.filter((task) => task.priority === 'low')
+    } else if (filter === 'medium') {
+        return state.todo.tasks.filter((task) => task.priority === 'medium')
+    }else if(filter=== 'high'){
+        return state.todo.tasks.filter((task) => task.priority === 'low')
+
+    }else {
+        return state.todo.tasks
+    }
 };
 export const selectFilter = (state: RootState) => {
     return state.todo.filter;
 };
 
-export const { addTask, toggleCompleteState, deleteTask}=taskSlice.actions
+export const { addTask, toggleCompleteState, deleteTask, updateTask, updateFilter } = taskSlice.actions
 export default taskSlice.reducer;
