@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { deleteTask, toggleCompleteState } from "@/redux/features/task/taskSlice";
 import { useappDispatch } from "@/redux/hook";
 import { ITask } from "@/types";
-import { Trash2 } from "lucide-react";
+import { Edit,  Trash2 } from "lucide-react";
 
 interface IProps {
     task: ITask;
@@ -24,6 +24,12 @@ export default function TaskCard({ task }: IProps) {
                     <h1 className={cn({"line-through" : task.isCompleted})}>{task.title}</h1>
                 </div>
                 <div className="flex gap-3 items-center">
+                    <Button 
+                        variant="link" className="p-0 text-orange-500">
+                        <Edit/>
+                       
+
+                    </Button>
                     <Button onClick={() => dispatch(deleteTask(task.id))}
                         variant="link" className="p-0 text-red-500">
                         <Trash2 />
@@ -37,3 +43,4 @@ export default function TaskCard({ task }: IProps) {
         </div>
     );
 }
+

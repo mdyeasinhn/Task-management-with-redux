@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ModeToggle } from "../mode-toggle";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +36,7 @@ const Navbar = () => {
                                     d="M6 18L18 6M6 6l12 12"
                                 />
                             </svg>
-                         ) : (
+                        ) : (
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="w-6 h-6"
@@ -60,30 +61,20 @@ const Navbar = () => {
                             : "opacity-0 -translate-x-full lg:opacity-100"}`}
                     >
                         <div className="flex flex-col items-center lg:flex-row">
-                            <a
+                            <Link to="/"
                                 className="my-2 text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 lg:mx-4 lg:my-0"
-                                href="#"
+
                             >
-                                Home
-                            </a>
-                            <a
+                                Task
+                            </Link>
+                            <Link to="/users"
                                 className="my-2 text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 lg:mx-4 lg:my-0"
-                                href="#"
+
                             >
-                                Features
-                            </a>
-                            <a
-                                className="my-2 text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 lg:mx-4 lg:my-0"
-                                href="#"
-                            >
-                                Pricing
-                            </a>
-                            <a
-                                className="my-2 text-gray-700 dark:text-gray-200 hover:text-green-500 dark:hover:text-green-400 lg:mx-4 lg:my-0"
-                                href="#"
-                            >
-                                Contact
-                            </a>
+                                User
+                            </Link>
+
+
                         </div>
                     </div>
 
