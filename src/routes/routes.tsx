@@ -15,7 +15,7 @@ const routes = createBrowserRouter([
                 element : <Task/>
             },
             {
-                path: "users",
+                path: "/users",
                 element : <User/>
             }
         ]

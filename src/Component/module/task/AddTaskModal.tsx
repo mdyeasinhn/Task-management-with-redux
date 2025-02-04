@@ -22,6 +22,8 @@ import { Select, SelectContent,  SelectItem, SelectTrigger, SelectValue } from "
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { addTask } from "@/redux/features/task/taskSlice";
+import { selectUser } from "@/redux/features/user/userslice";
+import { useAppSelector } from "@/redux/hook";
 import { ITask } from "@/types";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { format } from "date-fns";
@@ -30,11 +32,14 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 export function AddTaskModel() {
+
+  const users = useAppSelector(selectUser)
   const form = useForm({
     defaultValues: {
       title: "",
       description: "",
       dueDate: "",
+      assignedTo: "",
       priority: ""// Initialize the field
     },
   });
@@ -101,6 +106,28 @@ export function AddTaskModel() {
                       <SelectItem value="low">Low</SelectItem>
                       <SelectItem value="medium">Medium</SelectItem>
                       <SelectItem value="high">High</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="assignedTo"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Assign To</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a Priority to set" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                   {
+                    users.map((user) =>(
+                      <SelectItem value={user.id}>{user.name}</SelectItem>
+                    ))}
                     </SelectContent>
                   </Select>
                 </FormItem>

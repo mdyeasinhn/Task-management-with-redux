@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-const logger = (state) => (next) => (action) => {
+const logger = (state:any) => (next: any) => (action: any) => {
     console.group(action.type);
     console.info("Prv State",state.getState());
     const result = next(action);
