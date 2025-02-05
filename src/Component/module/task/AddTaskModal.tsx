@@ -28,11 +28,12 @@ import { ITask } from "@/types";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
 export function AddTaskModel() {
-
+const [open, setOpen] = useState(false);
   const users = useAppSelector(selectUser)
   const form = useForm({
     defaultValues: {
@@ -47,11 +48,13 @@ export function AddTaskModel() {
 
   const onSubmit : SubmitHandler<FieldValues> = (data) => {
     console.log("Form Data: ", data); // This will log the field data
-    dispatch(addTask(data as ITask))
+    dispatch(addTask(data as ITask));
+    setOpen(false);
+    form.reset();
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>Add Task</Button>
       </DialogTrigger>
