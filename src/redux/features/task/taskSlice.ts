@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RootState } from "@/redux/store";
 import { ITask } from "@/types";
 import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit";
@@ -75,11 +76,11 @@ export const selectTasks = (state: RootState) => {
     const filter = state.todo.filter;
 
     if (filter === 'low') {
-        return state.todo.tasks.filter((task) => task.priority === 'low')
+        return state.todo.tasks.filter((task :any) => task.priority === 'low')
     } else if (filter === 'medium') {
-        return state.todo.tasks.filter((task) => task.priority === 'medium')
+        return state.todo.tasks.filter((task :any) => task.priority === 'medium')
     } else if (filter === 'high') {
-        return state.todo.tasks.filter((task) => task.priority === 'low')
+        return state.todo.tasks.filter((task :any) => task.priority === 'low')
 
     } else {
         return state.todo.tasks
