@@ -21,6 +21,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent,  SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { useCreateTaskMutation } from "@/redux/api/baseApi";
 import { addTask } from "@/redux/features/task/taskSlice";
 import { selectUser } from "@/redux/features/user/userslice";
 import { useAppSelector } from "@/redux/hook";
@@ -35,20 +36,27 @@ import { useDispatch } from "react-redux";
 export function AddTaskModel() {
 const [open, setOpen] = useState(false);
   const users = useAppSelector(selectUser)
-  const form = useForm({
-    defaultValues: {
-      title: "",
-      description: "",
-      dueDate: "",
-      assignedTo: "",
-      priority: ""// Initialize the field
-    },
-  });
-  const dispatch = useDispatch();
+  // const form = useForm({
+  //   defaultValues: {
+  //     title: "",
+  //     description: "",
+  //     dueDate: "",
+  //     assignedTo: "",
+  //     priority: ""// Initialize the field
+  //   },
+  // });
+ // const dispatch = useDispatch();
 
-  const onSubmit : SubmitHandler<FieldValues> = (data) => {
+const [createTask, {data, isLoading, isError,}] = useCreateTaskMutation();
+  const onSubmit : SubmitHandler<FieldValues> =async (data) => {
     console.log("Form Data: ", data); // This will log the field data
-    dispatch(addTask(data as ITask));
+   
+    const taskData ={
+      ...data,
+      isCompleted : false,
+    }
+  const res= await  createTask(taskData).unwrap();
+  console.log('inside submit func', res)
     setOpen(false);
     form.reset();
   };

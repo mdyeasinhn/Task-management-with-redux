@@ -3,9 +3,9 @@ import TaskCard from "@/Component/module/task/taskCard";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGetTaskQuery } from "@/redux/api/baseApi";
 
-import { selectTasks, updateFilter } from "@/redux/features/task/taskSlice";
+// import { selectTasks, updateFilter } from "@/redux/features/task/taskSlice";
 
-import { useappDispatch, useAppSelector } from "@/redux/hook";
+// import { useappDispatch, useAppSelector } from "@/redux/hook";
 import { ITask } from "@/types";
 
 export default function Task() {
@@ -14,7 +14,7 @@ export default function Task() {
     
     console.log({data, isLoading, isError})
     // const tasks = useAppSelector(selectTasks);
-    const dispatch = useappDispatch();
+    // const dispatch = useappDispatch();
 
 
     if(isLoading){
@@ -37,7 +37,7 @@ export default function Task() {
             </div>
             <div className="space-y-5 mt-5">
                 {
-                  !isLoading && data.tasks.map((task : ITask,) => (
+                  !isLoading && data.tasks.map((task : ITask,index) => (
                         <TaskCard key={index} task={task} />
                     ))
                 }
